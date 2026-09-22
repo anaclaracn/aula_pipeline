@@ -30,6 +30,14 @@ jobs:
       - name: Run main Python
         run: python main.py
 
+      - name: Install dependencies
+        run: pip install pytest pytest-md pytest-emoji
+      - uses: pavelzw/pytest-action@v2
+        with:
+          emoji: false
+          verbose: false
+          job-summary: true
+
       - name: Run pytest
         uses: pavelzw/pytest-action@v2
         with:
@@ -39,14 +47,6 @@ jobs:
           custom-arguments: '-q'
           click-to-expand: true
           report-title: 'Test Report'
-
-      - name: Install dependencies
-        run: pip install pytest pytest-md pytest-emoji
-      - uses: pavelzw/pytest-action@v2
-        with:
-          emoji: false
-          verbose: false
-          job-summary: true
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
