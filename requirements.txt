@@ -1,0 +1,4 @@
+# Dependência baseline (versão segura / corrigida)
+# Usada na demonstração do Requisito 5: trocar para urllib3==1.26.4 introduz
+# o CVE-2021-33503 (HIGH), bloqueando o pipeline no Trivy.
+urllib3==2.2.3
