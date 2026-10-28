@@ -1,4 +1,4 @@
 # Dependência baseline (versão segura / corrigida)
 # Usada na demonstração do Requisito 5: trocar para urllib3==2.2.3 introduz
 # 6 CVEs HIGH (corrigidos a partir da 2.6.0), bloqueando o pipeline no Trivy.
-urllib3==2.8.0
+urllib3==2.2.3
