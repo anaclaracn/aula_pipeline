@@ -51,7 +51,7 @@ A publicação da imagem (`publish`) só executa após o sucesso de `gitleaks`,
 .
 ├── .github/workflows/ci.yml   # pipeline DevSecOps
 ├── Dockerfile                  # imagem da aplicação
-├── requirements.txt            # dependências (baseline seguro: urllib3 2.2.3)
+├── requirements.txt            # dependências (baseline seguro: urllib3 2.8.0)
 ├── .dockerignore
 ├── main.py                     # aplicação
 └── test_main.py                # testes
@@ -92,22 +92,22 @@ exigindo os checks: `gitleaks`, `build-test`, `sonarcloud` e `security-scan`.
 git checkout -b demo/vulnerabilidade
 
 # Troque a versão no requirements.txt:
-#   urllib3==2.2.3  ->  urllib3==1.26.4   (CVE-2021-33503, HIGH)
+#   urllib3==2.8.0  ->  urllib3==2.2.3   (6 CVEs HIGH: CVE-2025-66418, CVE-2026-21441, ...)
 
 git add requirements.txt
-git commit -m "demo: introduz dependência vulnerável (urllib3 1.26.4)"
+git commit -m "demo: introduz dependência vulnerável (urllib3 2.2.3)"
 git push -u origin demo/vulnerabilidade
 ```
 
 Abra um Pull Request. O pipeline **falha** no job `security-scan`, no passo
-*Trivy — scan de dependências (bloqueante)*, apontando o CVE-2021-33503.
+*Trivy — scan de dependências (bloqueante)*, apontando os CVEs HIGH do urllib3 2.2.3.
 O merge fica **bloqueado**.
 
 ### Passo 2 — corrigir a dependência
 
 ```bash
 # Volte a versão no requirements.txt:
-#   urllib3==1.26.4  ->  urllib3==2.2.3
+#   urllib3==2.2.3  ->  urllib3==2.8.0
 
 git add requirements.txt
 git commit -m "fix: atualiza urllib3 para versão corrigida"
