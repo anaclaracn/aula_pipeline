@@ -90,13 +90,17 @@ jobs:
       - name: Executar testes com cobertura
         run: pytest --cov=. --cov-report=xml --cov-report=term-missing
 
-      - name: Análise SonarCloud (Quality Gate)
-        uses: SonarSource/sonarqube-scan-action@v4
+      - name: Análise SonarCloud
+        uses: SonarSource/sonarqube-scan-action@v6.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.qualitygate.wait=true
+          SONAR_HOST_URL: https://sonarcloud.io
+
+      - name: SonarCloud Quality Gate check
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   # ============================================================
   # Requisitos 3 e 4 — Trivy (dependências + imagem) e Syft (SBOM)
