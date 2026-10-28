@@ -115,7 +115,7 @@ jobs:
       # Trivy — dependências do projeto (fs)
       # Bloqueia CRITICAL e HIGH apenas quando há correção disponível (ignore-unfixed).
       - name: Trivy — scan de dependências (bloqueante)
-        uses: aquasecurity/trivy-action@v0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs'
           scan-ref: '.'
@@ -130,7 +130,7 @@ jobs:
       # Trivy — imagem Docker
       # Bloqueia CRITICAL e HIGH com correção disponível.
       - name: Trivy — scan da imagem (bloqueante)
-        uses: aquasecurity/trivy-action@v0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           format: 'table'
@@ -140,7 +140,7 @@ jobs:
 
       # Trivy — LOW e MEDIUM: apenas relatório, sem bloquear (exit-code 0)
       - name: Trivy — relatório LOW/MEDIUM (não bloqueante)
-        uses: aquasecurity/trivy-action@v0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: ${{ env.IMAGE_NAME }}:${{ github.sha }}
           format: 'json'
