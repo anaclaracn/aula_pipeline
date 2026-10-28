@@ -16,5 +16,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia o restante da aplicação
 COPY . .
 
+# Executa como usuário não-root (evita a descoberta de segurança "runs as root")
+USER nobody
+
 # Executa a aplicação
 CMD ["python", "main.py"]

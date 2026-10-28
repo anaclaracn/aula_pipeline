@@ -32,7 +32,7 @@ jobs:
         run: |
           wget -q https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz
           tar -xzf gitleaks_8.18.4_linux_x64.tar.gz gitleaks
-          sudo mv gitleaks /usr/local/bin/
+          echo "$PWD" >> "$GITHUB_PATH"
 
       # --exit-code 1 bloqueia o merge quando um possível vazamento é detectado
       - name: Executar Gitleaks (bloqueante)
