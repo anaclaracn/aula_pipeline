@@ -126,9 +126,11 @@ artifact da execução. Para baixar: **Actions → execução → Artifacts → 
 
 ## Entregáveis
 
+As evidências (capturas de tela e SBOM) estão na pasta [`evidencias/`](evidencias/).
+
 - [x] Repositório GitHub com código-fonte e workflow YAML (`ci.yml`)
-- [x] Evidência de execução do pipeline (Actions → execuções)
-- [x] Captura do PR bloqueado + trecho do relatório da vulnerabilidade
-- [x] Captura da execução aprovada após a correção
-- [x] SBOM publicado como artifact
+- [x] Evidência de execução do pipeline (`evidencias/pipe_verde.png`, `evidencias/pipe_success.png`)
+- [x] Captura do PR bloqueado + trecho do relatório da vulnerabilidade (`evidencias/erro_vulnerabilidade_pr.png`, `evidencias/erro_pipe_pr_vulnerabilidade.png`)
+- [x] Captura da execução aprovada após a correção (`evidencias/success_pipe_pr.png`)
+- [x] SBOM publicado como artifact (`evidencias/sbom.spdx.json`)
 - [x] Este README com ferramentas, verificações e regras de bloqueio
