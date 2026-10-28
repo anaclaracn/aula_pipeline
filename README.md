@@ -11,7 +11,7 @@ segurança (*shift-left security*) antes da publicação da imagem Docker.
 | **SonarCloud** | SAST (análise estática) | Análise de qualidade e segurança do código novo via Quality Gate | Sim — se o Quality Gate reprovar |
 | **Trivy** (fs) | Análise de dependências | Varre as dependências do projeto (requirements.txt) | Sim — CRITICAL/HIGH com correção |
 | **Trivy** (imagem) | Análise de imagem | Varre a imagem Docker construída | Sim — CRITICAL/HIGH com correção |
-| **Trivy** (relatório) | Análise de imagem | Registra LOW/MEDIUM em relatório | Não — apenas relatório |
+| **Trivy** (relatório) | Dependências + imagem | Registra LOW/MEDIUM em relatório | Não — apenas relatório |
 | **Syft** | SBOM | Gera o *Software Bill of Materials* da imagem | Não — gera artifact |
 
 ## Regras de bloqueio
@@ -49,12 +49,15 @@ A publicação da imagem (`publish`) só executa após o sucesso de `gitleaks`,
 
 ```
 .
-├── .github/workflows/ci.yml   # pipeline DevSecOps
-├── Dockerfile                  # imagem da aplicação
-├── requirements.txt            # dependências (baseline seguro: urllib3 2.8.0)
+├── .github/workflows/ci.yml    # pipeline DevSecOps
+├── Dockerfile                   # imagem da aplicação
+├── requirements.txt             # dependências (baseline seguro: urllib3 2.8.0)
+├── sonar-project.properties     # configuração do SonarCloud (org, key, fontes)
 ├── .dockerignore
-├── main.py                     # aplicação
-└── test_main.py                # testes
+├── main.py                      # aplicação
+├── test_main.py                 # testes
+├── evidencias/                  # prints e SBOM (entregáveis)
+└── README.md
 ```
 
 ## Pré-requisitos e configuração
@@ -129,7 +132,7 @@ artifact da execução. Para baixar: **Actions → execução → Artifacts → 
 As evidências (capturas de tela e SBOM) estão na pasta [`evidencias/`](evidencias/).
 
 - [x] Repositório GitHub com código-fonte e workflow YAML (`ci.yml`)
-- [x] Evidência de execução do pipeline (`evidencias/pipe_verde.png`, `evidencias/pipe_success.png`)
+- [x] Evidência de execução do pipeline e do SonarCloud (`evidencias/pipe_verde.png`, `evidencias/pipe_success.png`, `evidencias/sonarqube.png`)
 - [x] Captura do PR bloqueado + trecho do relatório da vulnerabilidade (`evidencias/erro_vulnerabilidade_pr.png`, `evidencias/erro_pipe_pr_vulnerabilidade.png`)
 - [x] Captura da execução aprovada após a correção (`evidencias/success_pipe_pr.png`)
 - [x] SBOM publicado como artifact (`evidencias/sbom.spdx.json`)

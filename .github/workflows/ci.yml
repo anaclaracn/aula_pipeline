@@ -113,6 +113,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Trivy — dependências (fs): LOW/MEDIUM apenas relatório (não bloqueante)
+      - name: Trivy — deps LOW/MEDIUM (relatório, não bloqueante)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'json'
+          output: 'trivy-deps-low-medium.json'
+          exit-code: '0'
+          severity: 'LOW,MEDIUM'
+
+      - name: Publicar relatório Trivy deps (LOW/MEDIUM)
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-deps-low-medium
+          path: trivy-deps-low-medium.json
+
       # Trivy — dependências do projeto (fs)
       # Bloqueia CRITICAL e HIGH apenas quando há correção disponível (ignore-unfixed).
       - name: Trivy — scan de dependências (bloqueante)
