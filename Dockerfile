@@ -13,8 +13,8 @@ RUN apt-get update \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o restante da aplicação
-COPY . .
+# Copia apenas o código da aplicação (evita copiar dados sensíveis/arquivos indevidos)
+COPY main.py .
 
 # Executa como usuário não-root (evita a descoberta de segurança "runs as root")
 USER nobody
