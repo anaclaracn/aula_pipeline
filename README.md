@@ -66,12 +66,10 @@ A publicação da imagem (`publish`) só executa após o sucesso de `gitleaks`,
 3. Gere um token em *My Account → Security → Generate Tokens*.
 4. No repositório GitHub, acesse **Settings → Secrets and variables → Actions**:
    - Adicione o **secret** `SONAR_TOKEN` com o token gerado.
-   - Adicione as **variáveis**:
-     - `SONAR_ORGANIZATION` — nome da organização no SonarCloud.
-     - `SONAR_PROJECT_KEY` — chave do projeto (ex.: `anaclaracn_aula_pipeline`).
-5. (Opcional) Ajuste o Quality Gate em *Quality Gates* para focar no código novo.
+5. A organização e a chave do projeto já estão definidas em `sonar-project.properties`
+   (não há variáveis a configurar).
 
-> O job `sonarcloud` falha até que o token e as variáveis sejam configurados.
+> O job `sonarcloud` falha até que o token seja configurado.
 
 ### 2. GitHub Container Registry (publicação)
 
